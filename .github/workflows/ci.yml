@@ -35,8 +35,8 @@ jobs:
       - name: Show test results log
         run: cat test-results.log || echo "No log file found"
 
-      - name: Upload test log artifact
-        uses: actions/upload-artifact@v2.3.1
-        with:
-          name: selenium-test-log
-          path: test-results.log
+#      - name: Upload test log artifact
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: selenium-test-log
+#          path: test-results.log
