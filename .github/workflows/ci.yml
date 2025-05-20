@@ -1,0 +1,42 @@
+name: Selenium UI Test
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t excel-test .
+
+      - name: Run Selenium tests in container
+        id: run-tests
+        run: |
+          # Lance le conteneur en mode détaché et récupère son ID
+          CONTAINER_ID=$(docker run -d excel-test)
+
+          # Attend que le conteneur termine
+          docker wait $CONTAINER_ID
+
+          # Copie le fichier test-results.log du conteneur vers le runner GitHub
+          docker cp $CONTAINER_ID:/app/test-results.log ./test-results.log
+
+          # Supprime le conteneur
+          docker rm $CONTAINER_ID
+
+      - name: Show test results log
+        run: cat test-results.log || echo "No log file found"
+
+      - name: Upload test log artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: selenium-test-log
+          path: test-results.log

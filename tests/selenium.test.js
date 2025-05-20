@@ -1,7 +1,15 @@
-const { Builder, By, until } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
+const fs = require('fs');
+const logFile = 'test-results.log';
+
+function log(message) {
+  console.log(message);
+  fs.appendFileSync(logFile, message + '\n');
+}
 
 async function runTest() {
+  const { Builder, By, until } = require('selenium-webdriver');
+  const chrome = require('selenium-webdriver/chrome');
+
   const options = new chrome.Options();
   options.setChromeBinaryPath(process.env.CHROME_BIN);
   options.addArguments('--headless');
@@ -15,23 +23,24 @@ async function runTest() {
     .build();
 
   try {
-    console.log("Chargement de la page...");
+    log("Début du test");
+    log("Chargement de la page...");
     await driver.get('https://localhost:3000/taskpane-test.html');
-    console.log("Page chargée");
+    log("Page chargée");
 
-    const button = await driver.wait(until.elementIsVisible(driver.findElement(By.id('myButton'))), 10000);
-    await driver.wait(until.elementIsEnabled(button), 10000);
+    const button = await driver.wait(until.elementLocated(By.id('myButton')), 10000);
     await button.click();
+    log("Clic effectué");
 
     const message = await driver.wait(until.elementLocated(By.id('message')), 5000);
     const visible = await message.isDisplayed();
+    log("Test bouton visible: " + visible);
 
-    console.log("Test bouton visible:", visible);
   } catch (err) {
-    console.error("Erreur pendant le test :", err);
+    log("Erreur pendant le test : " + err);
   } finally {
     await driver.quit();
-    console.log("Test terminé");
+    log("Test terminé");
   }
 }
 
