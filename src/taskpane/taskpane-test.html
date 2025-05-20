@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Test Add-in</title>
+</head>
+<body>
+  <button id="myButton">Clique-moi</button>
+  <div id="message" style="display:none;">Test réussi !</div>
+
+  <script>
+    document.getElementById('myButton').onclick = () => {
+      document.getElementById('message').style.display = 'block';
+    };
+  </script>
+</body>
+</html>
