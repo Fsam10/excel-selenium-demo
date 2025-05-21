@@ -120,11 +120,11 @@ Cela permet une validation automatique à chaque push.
 
 |               Résultat docker build + test               |                 Log affiché dans GitHub Actions                |
 | :------------------------------------------------------: | :------------------------------------------------------------: |
-| ![Docker build](./Capture_d_ecran_2025-05-20_200310.png) | ![Log GitHub Actions](./Capture_d_ecran_2025-05-20_233225.png) |
+| ![Docker build](./Capture_d_ecran_2025-05-20_204320.png) | ![Log GitHub Actions](./Capture_d_ecran_2025-05-20_233225.png) |
 
 |                     Add-in dans Excel                    |                    Webpack build output                   |
 | :------------------------------------------------------: | :-------------------------------------------------------: |
-| ![Add-in Excel](./Capture_d_ecran_2025-05-20_180240.png) | ![Webpack build](./Capture_d_ecran_2025-05-20_204320.png) |
+| ![Add-in Excel](./Capture_d_ecran_2025-05-20_180240.png) | ![Webpack build](./Capture_d_ecran_2025-05-20_200310.png) |
 
 ---
 
